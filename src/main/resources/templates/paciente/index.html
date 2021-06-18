@@ -7,10 +7,21 @@
     <body>
         <div class="container">
             <nav th:replace="layout :: menu">(menu)</nav>
-
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Sexo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" th:each="umpaciente : ${listaPacientes}">
+                        <td th:text="${umpaciente.nome}"></td>
+                        <td th:text="${umpaciente.sexo}"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        
-        
         <div th:include="layout :: footer">(footer)</div>
     </body>
 </html> 
