@@ -3,6 +3,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import br.univille.walterdsi2021.model.Paciente;
@@ -20,4 +22,14 @@ public class PacienteController {
         List<Paciente> listaPacientes = service.getAll();
         return new ModelAndView("paciente/index", "listaPacientes", listaPacientes);    
     }
+    @GetMapping("/novo")
+    public ModelAndView novo(@ModelAttribute Paciente paciente){
+        return new ModelAndView("paciente/form");
+    }
+    @PostMapping(params="form")
+    public ModelAndView save(Paciente paciente){
+        System.out.println(paciente.getNome());
+        return new ModelAndView("paciente/form");
+    }
+
 }
