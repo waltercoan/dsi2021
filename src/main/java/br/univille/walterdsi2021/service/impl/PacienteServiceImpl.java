@@ -19,5 +19,10 @@ public class PacienteServiceImpl implements PacienteService{
     public List<Paciente> getAll() {
         return repository.findAll();
     }
+
+    @Override
+    public void save(Paciente paciente) {
+        repository.save(paciente);
+    }
     
 }

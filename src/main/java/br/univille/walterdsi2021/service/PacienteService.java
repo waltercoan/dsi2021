@@ -7,4 +7,5 @@ import br.univille.walterdsi2021.model.Paciente;
 @Service
 public interface PacienteService {
     public List<Paciente> getAll();
+    public void save(Paciente paciente);
 }

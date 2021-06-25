@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,8 +29,13 @@ public class PacienteController {
     }
     @PostMapping(params="form")
     public ModelAndView save(Paciente paciente){
-        System.out.println(paciente.getNome());
-        return new ModelAndView("paciente/form");
+        service.save(paciente);
+        return new ModelAndView("redirect:/paciente");
+    }
+
+    @GetMapping("/alterar/{id}")
+    public ModelAndView alterar(@PathVariable("id") Paciente paciente){
+        return new ModelAndView("/paciente/form","paciente",paciente);
     }
 
 }
