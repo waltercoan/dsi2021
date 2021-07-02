@@ -24,5 +24,10 @@ public class PacienteServiceImpl implements PacienteService{
     public void save(Paciente paciente) {
         repository.save(paciente);
     }
+
+    @Override
+    public void delete(Paciente paciente) {
+        repository.delete(paciente);
+    }
     
 }

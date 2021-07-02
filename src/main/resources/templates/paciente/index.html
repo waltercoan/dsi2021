@@ -39,8 +39,17 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 $("#pacientes").on('click', ".js-delete", function(){
+                    let button = $(this);
                     bootbox.confirm("Confirma a exclusão do registro?",function(result){
-                        console.log(result);
+                        if(result){
+                            $.ajax({
+                                url : "/paciente/delete/" + button.attr("data-id"),
+                                method: "GET",
+                                success : function(){
+                                    window.location.href = "/paciente/";
+                                }
+                            });
+                        }
                     });
                 });
             });

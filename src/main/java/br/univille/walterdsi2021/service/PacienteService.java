@@ -8,4 +8,5 @@ import br.univille.walterdsi2021.model.Paciente;
 public interface PacienteService {
     public List<Paciente> getAll();
     public void save(Paciente paciente);
+    public void delete(Paciente paciente);
 }
