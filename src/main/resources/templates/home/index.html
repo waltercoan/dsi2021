@@ -6,7 +6,7 @@
 
     <body>
         <div class="container">
-            <nav th:replace="layout :: menu">(menu)</nav>
+            <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
 
             <h1 th:text="${nome}"></h1>
             <!-- binding -->

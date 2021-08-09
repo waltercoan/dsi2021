@@ -6,7 +6,7 @@
 
     <body>
         <div class="container">
-            <nav th:replace="layout :: menu">(menu)</nav>
+            <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
             <div class="border border-dark">
                 <form th:action="@{/paciente/(form)}" th:object="${paciente}" method="POST">
                     <input type="hidden" th:field="*{id}">

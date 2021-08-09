@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     
-    <head th:include="layout :: htmlhead"></head>
+    <head th:replace="layout :: htmlhead"></head>
 
     <body>
         <div class="container">
-            <nav th:replace="layout :: menu">(menu)</nav>
+            <nav th:replace="layout :: menu (buttons = ${ {{'link1','label1'},{'link2','label2'}} })">(menu)</nav>
 
             <a th:href="@{/paciente/novo}" class="btn btn-primary">Novo Paciente</a>
 
@@ -34,7 +34,7 @@
                 </tbody>
             </table>
         </div>
-        <div th:include="layout :: footer">(footer)</div>
+        <div th:replace="layout :: footer">(footer)</div>
 
         <script type="text/javascript">
             $(document).ready(function(){

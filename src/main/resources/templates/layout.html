@@ -6,7 +6,7 @@
         <link rel="stylesheet" th:href="@{/site.css}" />
     </head>
     <body>
-        <nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav th:fragment="menu (buttons)" class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Sistema</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -15,6 +15,9 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                   <li class="nav-item active">
                     <a class="nav-link" href="/">Home</a>
+                  </li>
+                  <li class="nav-item active" th:each="item : ${buttons}">
+                    <a class="nav-link" th:href="${item[0]}" th:text="${item[1]}"></a>
                   </li>
                 </ul>
             </div>
