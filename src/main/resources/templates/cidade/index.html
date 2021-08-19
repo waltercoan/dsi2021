@@ -10,7 +10,7 @@
             
             <a th:href="@{/cidade/novo}" class="btn btn-primary">Nova Cidade</a>
 
-            <table class="table" >
+            <table class="table" id="cidades">
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -24,11 +24,34 @@
                         <td th:text="${umacidade.estado}"></td>
                         <td>
                             <a th:href="@{'/cidade/alterar/'+${umacidade.id}}" class="btn btn-secondary">Alterar</a>
+                            <button class="btn btn-danger js-delete"
+                                    th:data-id="${umacidade.id}">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Excluir
+                            </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div th:replace="layout :: footer">(footer)</div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#cidades").on('click', ".js-delete", function(){
+                    let button = $(this);
+                    bootbox.confirm("Confirma a exclusão do registro?",function(result){
+                        if(result){
+                            $.ajax({
+                                url : "/cidade/delete/" + button.attr("data-id"),
+                                method: "GET",
+                                success : function(){
+                                    window.location.href = "/cidade/";
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script> 
     </body>
 </html> 

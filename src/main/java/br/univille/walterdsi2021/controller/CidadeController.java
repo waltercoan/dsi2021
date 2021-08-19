@@ -39,4 +39,9 @@ public class CidadeController {
     public ModelAndView alterar(@PathVariable("id") Cidade cidade){
         return new ModelAndView("/cidade/form","cidade",cidade);
     }
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Cidade cidade){
+        service.delete(cidade);
+        return new ModelAndView("redirect:/cidade");
+    }
 }
