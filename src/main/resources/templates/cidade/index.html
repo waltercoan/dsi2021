@@ -23,6 +23,7 @@
                         <td th:text="${umacidade.nome}"></td>
                         <td th:text="${umacidade.estado}"></td>
                         <td>
+                            <a th:href="@{'/cidade/alterar/'+${umacidade.id}}" class="btn btn-secondary">Alterar</a>
                         </td>
                     </tr>
                 </tbody>
