@@ -26,6 +26,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="slccidade">Cidade:</label>
+                                <select class="form-control" id="slccidade" th:field="*{cidade}">
+                                    <option th:value="${umaCidade.id}" 
+                                            th:text="${umaCidade.nome}"
+                                            th:each="umaCidade : ${listaCidades}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
