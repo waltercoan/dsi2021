@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,9 +18,16 @@ public class Paciente {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
-
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    private Cidade cidade;
     
 
+    public Cidade getCidade() {
+        return cidade;
+    }
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
     public Usuario getUsuario() {
         return usuario;
     }

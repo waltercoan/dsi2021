@@ -8,7 +8,7 @@
         <div class="container">
             <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
             <div class="border border-dark">
-                <form th:action="@{/paciente/(form)}" th:object="${paciente}" method="POST">
+                <form th:action="@{/cidade/(form)}" th:object="${cidade}" method="POST">
                     <input type="hidden" th:field="*{id}">
                     <div class="form-group">
                         <div class="row">
@@ -21,21 +21,8 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-6">
-                                <label>Sexo:</label>
-                                <input type="text" th:field="*{sexo}" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="slccidade">Cidade:</label>
-                                <select class="form-control" id="slccidade" th:field="*{cidade}">
-                                    <option th:value="${umaCidade.id}" 
-                                            th:text="${umaCidade.nome}"
-                                            th:each="umaCidade : ${listaCidades}">
-                                    </option>
-                                </select>
+                                <label>Estado:</label>
+                                <input type="text" th:field="*{estado}" class="form-control">
                             </div>
                         </div>
                     </div>
