@@ -87,4 +87,10 @@ public class ConsultaController {
         return new ModelAndView("consulta/form",dados);
     }
 
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Consulta consulta){
+        service.delete(consulta);
+        return new ModelAndView("redirect:/consulta");
+    }
+
 }
