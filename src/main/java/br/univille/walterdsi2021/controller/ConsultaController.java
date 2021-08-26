@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,6 +74,16 @@ public class ConsultaController {
         dados.put("listaPacientes", listaPacientes);
         dados.put("novoprocrealizado", new ProcedimentoRealizado());
        
+        return new ModelAndView("consulta/form",dados);
+    }
+
+    @GetMapping("/alterar/{id}")
+    public ModelAndView alterar(@PathVariable("id") Consulta consulta){
+        List<Paciente> listaPacientes = this.pacienteService.getAll();
+        HashMap<String, Object> dados = new HashMap<String, Object>();
+        dados.put("consulta", consulta);
+        dados.put("listaPacientes", listaPacientes);
+        dados.put("novoprocrealizado", new ProcedimentoRealizado());
         return new ModelAndView("consulta/form",dados);
     }
 

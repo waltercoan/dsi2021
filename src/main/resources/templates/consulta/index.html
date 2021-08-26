@@ -25,7 +25,7 @@
                         <td th:text="${umaconsulta.status}"></td>
                         <td th:text="'R$' + ${#aggregates.sum(umaconsulta.listaProcedimentos.![valor])}"></td>
                         <td>
-                            
+                            <a th:href="@{'/consulta/alterar/'+${umaconsulta.id}}" class="btn btn-secondary">Alterar</a>
                         </td>
                     </tr>
                 </tbody>
