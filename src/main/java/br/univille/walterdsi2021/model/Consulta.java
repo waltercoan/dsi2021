@@ -12,23 +12,35 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date data;
     private String status;
 
     @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
     private Paciente paciente;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name="consulta_id")
     private List<ProcedimentoRealizado> listaProcedimentos = 
         new ArrayList<ProcedimentoRealizado>();
     
 
+    public List<ProcedimentoRealizado> getListaProcedimentos() {
+        return listaProcedimentos;
+    }
+    public void setListaProcedimentos(List<ProcedimentoRealizado> listaProcedimentos) {
+        this.listaProcedimentos = listaProcedimentos;
+    }
     public Paciente getPaciente() {
         return paciente;
     }

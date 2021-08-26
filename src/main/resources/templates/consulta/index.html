@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:replace="layout :: htmlhead"></head>
+
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
+            <a th:href="@{/consulta/novo}" class="btn btn-primary">Nova Consulta</a>
+            <table class="table" id="consultas">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Paciente</th>
+                        <th>Status</th>
+                        <th>Valor Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" th:each="umaconsulta : ${listaConsultas}">
+                        <td th:text="${umaconsulta.data}"></td>
+                        <td th:text="${umaconsulta.paciente.nome}"></td>
+                        <td th:text="${umaconsulta.status}"></td>
+                        <td th:text="'R$' + ${#aggregates.sum(umaconsulta.listaProcedimentos.![valor])}"></td>
+                        <td>
+                            <a th:href="@{'/consulta/alterar/'+${umaconsulta.id}}" class="btn btn-secondary">Alterar</a>
+                            <button class="btn btn-danger js-delete"
+                                    th:data-id="${umaconsulta.id}">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:replace="layout :: footer">(footer)</div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#consultas").on('click', ".js-delete", function(){
+                    let button = $(this);
+                    bootbox.confirm("Confirma a exclusão do registro?",function(result){
+                        if(result){
+                            $.ajax({
+                                url : "/consulta/delete/" + button.attr("data-id"),
+                                method: "GET",
+                                success : function(){
+                                    window.location.href = "/consulta/";
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script> 
+    </body>
+</html> 
