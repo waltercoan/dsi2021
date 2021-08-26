@@ -8,7 +8,7 @@
         <div class="container">
             <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
             <div class="border border-dark">
-                <form th:action="@{/consulta/(form)}" th:object="${consulta}" method="POST">
+                <form th:action="@{/consulta}" th:object="${consulta}" method="POST">
                     <input type="hidden" th:field="*{id}">
                     <div class="form-group">
                         <div class="row">
@@ -43,7 +43,54 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="card">
+                        <div class="card-header">Vincluar Procedimentos</div>
+                        <div class="card-body">
+                            <div class="container" th:object="${novoprocrealizado}">
+                              <div class="row">
+                                <div class="col-sm">
+                                    <label for="txtprocedimento">Procedimento</label>
+                                </div>
+                                <div class="col-md">
+                                  <input type="text" class="form-control" id="txtvalor" th:field="${novoprocrealizado.descricao}" placeholder="Descrição">
+                                </div>
+                                <div class="col-sm">
+                                  <label for="txtvalor">Valor</label>
+                                </div>
+                                <div class="col-sm">
+                                  <input type="text" class="form-control" id="txtvalor" th:field="${novoprocrealizado.valor}" placeholder="Valor">
+                                </div>
+                                <div class="col-sm">
+                                    <button type="submit" name="insertproc" class="btn btn-primary">Inserir item</button>
+                                </div>
+                              </div>
+                            </div>
+                            <br>                           
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Procedimento</th>
+                                    <th scope="col">Valor</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr scope="row" th:each="procreali, stat : ${consulta.listaProcedimentos}">
+                                    <input type="hidden" th:field="${consulta.listaProcedimentos[__${stat.index}__].descricao}"/>
+                                    <input type="hidden" th:field="${consulta.listaProcedimentos[__${stat.index}__].valor}"/>
+                                    <td th:text="${procreali.descricao}"></td>
+                                    <td th:text="${procreali.valor}"></td>
+                                    <td>
+                                        <button type="submit" name="removeproc" th:value="__${stat.index}__" class="btn btn-primary">Remover</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
             </div>

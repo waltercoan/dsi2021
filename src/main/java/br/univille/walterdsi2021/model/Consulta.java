@@ -29,7 +29,7 @@ public class Consulta {
     @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
     private Paciente paciente;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name="consulta_id")
     private List<ProcedimentoRealizado> listaProcedimentos = 
         new ArrayList<ProcedimentoRealizado>();
