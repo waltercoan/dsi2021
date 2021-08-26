@@ -7,7 +7,7 @@
     <body>
         <div class="container">
             <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
-
+            <a th:href="@{/consulta/novo}" class="btn btn-primary">Nova Consulta</a>
             <table class="table">
                 <thead>
                     <tr>

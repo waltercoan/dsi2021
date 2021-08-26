@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:include="layout :: htmlhead"></head>
+
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
+            <div class="border border-dark">
+                <form th:action="@{/consulta/(form)}" th:object="${consulta}" method="POST">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Data:</label>
+                                <input type="datetime-local" th:field="*{data}" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Status:</label>
+                                <select class="form-control" id="slcstatus" th:field="*{status}">
+                                        <option th:value="Agendado" th:text="Agendado"></option>
+                                        <option th:value="Andamento" th:text="Andamento"></option>
+                                        <option th:value="Finalizado" th:text="Finalizado"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Paciente:</label>
+                                <select class="form-control" id="slcpaciente" th:field="*{paciente}">
+                                    <option th:value="${umpaciente.id}" 
+                                            th:text="${umpaciente.nome}"
+                                            th:each="umpaciente : ${listaPacientes}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+        <div th:include="layout :: footer">(footer)</div>
+    </body>
+</html> 
