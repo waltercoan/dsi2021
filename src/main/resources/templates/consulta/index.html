@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:replace="layout :: htmlhead"></head>
+
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Paciente</th>
+                        <th>Status</th>
+                        <th>Valor Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" th:each="umaconsulta : ${listaConsultas}">
+                        <td th:text="${umaconsulta.data}"></td>
+                        <td th:text="${umaconsulta.paciente.nome}"></td>
+                        <td th:text="${umaconsulta.status}"></td>
+                        <td th:text="'R$' + ${#aggregates.sum(umaconsulta.listaProcedimentos.![valor])}"></td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:replace="layout :: footer">(footer)</div>
+    </body>
+</html> 
