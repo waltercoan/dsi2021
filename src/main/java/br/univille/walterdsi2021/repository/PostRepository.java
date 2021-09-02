@@ -10,5 +10,5 @@ import br.univille.walterdsi2021.model.Post;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post,Long>{
-    List<Post> findAllTopTenOrderByDataPostDesc();
+    List<Post> findAllTopTenByOrderByDataPostDesc();
 }

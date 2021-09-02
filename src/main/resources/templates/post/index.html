@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    
+    <head th:include="layout :: htmlhead"></head>
+
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
+            <div class="card" th:each="umpost : ${listaPosts}">
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${umpost.titulo}"></h5>
+                  <p class="card-text" th:text="${umpost.descricao}"></p>
+                  <footer class="blockquote-footer" th:text="${#dates.format(umpost.dataPost, 'dd/MM/yyyy')}"></footer>
+                </div>
+            </div>
+        </div>
+                
+        <div th:include="layout :: footer">(footer)</div>
+    </body>
+</html> 

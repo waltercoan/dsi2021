@@ -17,11 +17,13 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public List<Post> getAll() {
-        return repository.findAllTopTenOrderByDataPostDesc();
+        return repository.findAllTopTenByOrderByDataPostDesc();
     }
 
     @Override
     public void save(Post post) {
         repository.save(post);
+        
     }
+    
 }
