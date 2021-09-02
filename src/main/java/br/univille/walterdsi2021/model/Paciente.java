@@ -15,7 +15,14 @@ public class Paciente {
     private long id;
     private String nome;
     private String sexo;
+    private String foto;
 
+    public String getFoto() {
+        return foto;
+    }
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuario;
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
