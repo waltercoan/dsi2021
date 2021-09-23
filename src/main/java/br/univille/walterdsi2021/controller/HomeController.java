@@ -24,4 +24,9 @@ public class HomeController {
         return new ModelAndView("home/index", listaDeParzinho);
     }
 
+    @GetMapping("/cards")
+    public ModelAndView cardblock(){
+        return new ModelAndView("home/cards");
+    }
+
 }
