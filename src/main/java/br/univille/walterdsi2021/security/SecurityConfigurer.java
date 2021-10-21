@@ -13,10 +13,17 @@ import br.univille.walterdsi2021.service.impl.MyUserDetailsServiceImpl;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
+    
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers("/").permitAll();
-}
+        httpSecurity
+        .authorizeRequests()
+        .antMatchers("/fonte_dados/**").permitAll()
+        .anyRequest().authenticated().and().formLogin();
+
+        httpSecurity.csrf().ignoringAntMatchers("/fonte_dados/**");
+        httpSecurity.headers().frameOptions().sameOrigin();
+    }
     @Autowired
     private MyUserDetailsServiceImpl myUserDetailService;
 
