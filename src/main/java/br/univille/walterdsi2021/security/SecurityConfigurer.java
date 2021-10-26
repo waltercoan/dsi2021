@@ -22,17 +22,18 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-        .authorizeRequests()
-        .antMatchers("/fonte_dados/**","/api/v1/auth/signin").permitAll()
-        .antMatchers("/api/v1/").authenticated()
-        .anyRequest().authenticated().and().formLogin();
-        //.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        httpSecurity.csrf().disable()
+            .authorizeRequests().antMatchers("/api/v1/auth/signin","/swagger-ui.html","/webjars/**","/v2/api-docs/**","/swagger-resources/**").permitAll()
+            .antMatchers("/api/**").authenticated()
+            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authorizeRequests().antMatchers("/fonte_dados/**").permitAll().and().headers().frameOptions().disable()
+            .and()
+            .authorizeRequests().antMatchers("/**").authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+            .and().formLogin().permitAll()
+            .defaultSuccessUrl("/", true).and().logout().permitAll();
          
-        //httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
-        httpSecurity.csrf().ignoringAntMatchers("/fonte_dados/**","/api/v1/auth/signin");
-        httpSecurity.headers().frameOptions().sameOrigin();
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
     @Override
     @Bean
