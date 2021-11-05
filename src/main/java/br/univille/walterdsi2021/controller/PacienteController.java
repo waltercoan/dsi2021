@@ -8,8 +8,12 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,6 +50,7 @@ public class PacienteController {
         return new ModelAndView("paciente/index", "listaPacientes", listaPacientes);    
     }
     @GetMapping("/novo")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView novo(@ModelAttribute Paciente paciente){
         HashMap<String,Object> dados = new HashMap<>();
         List<Cidade> listaCidades = cidadeService.getAll();

@@ -2,6 +2,7 @@ package br.univille.walterdsi2021.model;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 public class Usuario {
@@ -28,6 +32,14 @@ public class Usuario {
     @Temporal(value = TemporalType.DATE)
     private Date data;
 
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        List<Papel> papeis = getListaPapeis();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for(Papel papel : papeis){
+            authorities.add(new SimpleGrantedAuthority(papel.getDescricao()));
+        }
+        return authorities;
+    }
 
     public List<Papel> getListaPapeis() {
         return listaPapeis;
