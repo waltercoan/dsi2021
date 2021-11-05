@@ -21,11 +21,10 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         return repository.findByUsuarioAndSenha(nomeUsuario, senhaUsuario);
     }
   
-
     @Override
     public UserDetails loadUserByUsername(String nomeUsuario) throws UsernameNotFoundException {
         Usuario usuario = repository.findByUsuario(nomeUsuario);
-        return new User(usuario.getUsuario(),usuario.getSenha(), new ArrayList<>());
+        return new User(usuario.getUsuario(),usuario.getSenha(), usuario.getAuthorities());
     }  
     
 }
