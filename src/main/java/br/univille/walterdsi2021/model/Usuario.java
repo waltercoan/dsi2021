@@ -1,11 +1,16 @@
 package br.univille.walterdsi2021.model;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,10 +22,19 @@ public class Usuario {
     private String usuario;
     private String senha;
 
+    @ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<Papel> listaPapeis = new ArrayList<Papel>();
+
     @Temporal(value = TemporalType.DATE)
     private Date data;
 
 
+    public List<Papel> getListaPapeis() {
+        return listaPapeis;
+    }
+    public void setListaPapeis(List<Papel> listaPapeis) {
+        this.listaPapeis = listaPapeis;
+    }
     public Date getData() {
         return data;
     }
