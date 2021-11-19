@@ -50,7 +50,7 @@ public class PacienteController {
         return new ModelAndView("paciente/index", "listaPacientes", listaPacientes);    
     }
     @GetMapping("/novo")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ModelAndView novo(@ModelAttribute Paciente paciente){
         HashMap<String,Object> dados = new HashMap<>();
         List<Cidade> listaCidades = cidadeService.getAll();
